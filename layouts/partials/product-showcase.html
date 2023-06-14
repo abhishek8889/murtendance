@@ -1,0 +1,17 @@
+{{ with .Site.GetPage "/product-items" }}
+<section id='showcase' class='showcase'>
+	{{ range .Sections }}
+		{{ .Render "showcase-card" }}
+	{{ end }}
+</section>
+
+<script>
+let $showcase;
+$on.dom(() => {
+	$showcase = new Slideshow($id('showcase'), {
+		slideSelector: '[data-slideshow="1"] > a'
+	})
+	$showcase.Navigate(0);
+});
+</script>
+{{ end }}

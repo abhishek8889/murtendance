@@ -1,0 +1,3 @@
+{{ with site.GetPage (printf "shared/%s" .) }}
+	{{ .Render (default "generic-block" .Params.render_as) }}
+{{ end }}

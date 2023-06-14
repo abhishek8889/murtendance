@@ -1,0 +1,46 @@
+{{ define "head_end" }}
+	{{ partial "stylesheet-link" "_testimonials" }}
+	{{ partial "stylesheet-link" "_inquiry-form" }}
+	{{ partial "stylesheet-link" "baguetteBox.min" }}
+	{{ partial "script-src" "baguetteBox" }}
+	{{ partial "stylesheet-link" "_inspirations-modal" }}
+
+{{ end }}
+
+{{ define "main" }}
+
+{{ $sections := .Pages }}
+{{ $product := (partial "get-block-slug" .) }}
+{{ $inspirations := (.Site.GetPage (printf "/inspiration-items/%s" $product)).Pages }}
+
+{{ with (index $sections 0) }}
+	{{ .Render (default "generic-block" .Params.render_as) }}
+{{ end }}
+
+<section id='inspirations' class='fixed-width'>
+	<ul class='image-gallery'>
+		{{ range (first 6 $inspirations) }}
+		<li>
+			{{ .Render "card" }}
+		</li>
+		{{ end }}
+	</ul>
+</section>
+
+{{ partial "inspirations-modal" . }}
+
+{{ range (after 1 $sections) }}
+	{{ .Render (default "generic-block" .Params.render_as) }}
+{{ end }}
+
+{{ with .Site.GetPage "/home/services" }}
+	{{ .Render (default "generic-block" .Params.render_as) }}
+{{ end }}
+
+{{ with .Site.GetPage "/home/testimonials" }}
+	{{ .Render (default "generic-block" .Params.render_as) }}
+{{ end }}
+
+	{{ partial "inquiry-form" (dict "list_type" "collections" "page" .) }}
+
+{{ end }}

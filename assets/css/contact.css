@@ -1,0 +1,31 @@
+#introduction p { max-width: var(--max-p-width); }
+
+h3 {
+	margin-top: var(--spacing-large);
+	font-weight: bold;
+	display: block;
+	font-size: 1.25rem;
+}
+
+#introduction p:first-of-type {
+	margin-bottom: var(--spacing-huge);
+}
+
+#introduction { margin-bottom: 0; }
+#separator-image { margin-top: 0; margin-bottom: 0; }
+#inquiry { margin-top: 0; }
+
+/* Remove white overlay */
+#separator-image::before { display: none; }
+
+#separator-image {
+	/* image height is controlled by this spacing */
+	--spacing-insane: 12rem;
+}
+
+
+@media screen and (max-width: 550px) {
+	#separator-image {
+		margin: var(--spacing-huge) 0;
+	}
+}

@@ -1,0 +1,22 @@
+{{ define "head_end" }}
+	{{ partial "stylesheet-link" "baguetteBox.min" }}
+	{{ partial "script-src" "baguetteBox" }}
+	{{ partial "stylesheet-link" "_inspirations-modal" }}
+	{{ partial "stylesheet-link" "_inquiry-form" }}
+{{ end }}
+
+{{ define "main" }}
+	{{ range (partial "get-section-pages" (partial "get-section-slug" .)) }}
+		{{ .Render (default "generic-block" .Params.render_as) }}
+	{{ end }}
+
+	<section id='inspirations' class="image-gallery">
+	{{ range (shuffle (partial "get-section-pages" "inspiration-items")) }}
+		{{ .Render "card" }}
+	{{ end }}
+	</section>
+
+	{{ partial "inspirations-modal" . }}
+
+	{{ partial "inquiry-form" . }}
+{{ end }}

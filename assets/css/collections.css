@@ -1,0 +1,84 @@
+#introduction { margin-bottom: 0; }
+
+.collections .collection {
+	margin: 0;
+	padding-top: 0;
+}
+
+.collections .links {
+	margin-top: var(--spacing-medium);
+}
+
+.collections .links a {
+	margin-right: var(--spacing-small);
+}
+
+@media only screen and (max-width: 767px) {
+	.collections .collection {
+		padding-top: var(--spacing-large);
+	}
+}
+
+.collection .models {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+}
+
+.collections h3 {
+	text-transform: uppercase;
+	margin-bottom: var(--spacing-small);
+}
+
+.models .media img {
+	width: 100%;
+	height: calc((16/9) * var(--column-width));
+	object-fit: cover;
+}
+
+.square-view .models .media img { 
+	height: 225px;
+	width: 225px;
+ }
+
+ .models li {
+	width: 225px;
+ }
+
+ @media only screen and (max-width: 992px) {
+	.square-view .models .media img { 
+		height: 130px;
+		width: 130px;
+	}
+
+	.models li {
+		width: 130px;
+	 }
+}
+
+@media only screen and (max-width: 767px) {
+	.square-view .models .media img { 
+		height: 100px;
+		width: 100px;
+	}
+
+	.models li {
+		width: 100px;
+	 }
+}
+
+
+.models li { display: block; }
+
+.models article {
+	display: flex;
+	flex-direction: column;
+}
+
+.model .name,
+.model .name > * { margin: 0; }
+
+#baguetteBox-overlay .full-image figure figcaption {
+	background: #fff;
+	color: var(--color-foreground);
+}

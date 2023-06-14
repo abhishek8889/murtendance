@@ -1,0 +1,9 @@
+{{ define "head_end" }}
+{{ partial "stylesheet-link" "legal" }}
+{{ end }}
+
+{{ define "main" }}
+<article id='legal-info' class='no-banner'>
+	{{ .Content }}
+</article>
+{{ end }}

@@ -1,0 +1,15 @@
+{{ define "head_end" }}
+	{{ partial "stylesheet-link" "_inquiry-form" }}
+{{ end }}
+
+{{ define "main" }}
+
+{{ $blocks := (partial "get-section-pages" (partial "get-section-slug" .)) }}
+
+{{ range $blocks  }}
+	{{ .Render (default "generic-block" .Params.render_as) }}
+{{ end }}
+
+{{ partial "inquiry-form" . }}
+
+{{ end }}

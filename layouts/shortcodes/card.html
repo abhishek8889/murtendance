@@ -1,0 +1,11 @@
+{{ $img := .Page.Resources.GetMatch (.Params.image) }}
+
+<div class='card'>
+	{{ if $img }}
+	<figure class='media'>
+		<img src="{{ $img.Permalink }}" alt="{{ default "" .Params.alt }}">
+	</figure>
+	{{ end }}
+
+	{{ .Inner | markdownify }}
+</div>

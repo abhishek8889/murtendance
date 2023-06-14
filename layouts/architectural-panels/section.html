@@ -1,0 +1,16 @@
+{{ define "head_end" }}
+	{{ partial "stylesheet-link" "_inquiry-form" }}
+	{{ partial "stylesheet-link" "baguetteBox.min" }}
+	{{ partial "stylesheet-link" "_showcase" }}
+	{{ partial "stylesheet-link" "_slideshow" }}
+	{{ partial "script-src" "slideshow" }}
+	{{ partial "script-src" "baguetteBox" }}
+{{ end }}
+
+{{ define "main" }}
+	{{ range (partial "get-section-pages" (partial "get-section-slug" .)) }}
+		{{ .Render (default "generic-block" .Params.render_as) }}
+	{{ end }}
+
+	{{ partial "inquiry-form" (dict "list_type" "architectural-panels" "page" .) }}
+{{ end }}

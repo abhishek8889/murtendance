@@ -1,0 +1,9 @@
+<article id='model-{{ (partial "get-section-slug" .) }}' class='model'>
+	<a href="{{ (partial "get-first-image" .).Permalink }}" data-name='{{ .Params.name }}'>
+		<figure class='media'>
+			{{ partial "collection-model-image" (partial "get-first-image" .) }}
+		</figure>
+	
+		<div class='name'>{{ .Params.name }}</div>
+	</a>
+</article>

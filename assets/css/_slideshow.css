@@ -1,0 +1,8 @@
+[data-slideshow] .slides {
+	overflow: hidden;
+	overflow-x: hidden;
+}
+
+[data-slideshow] .slides > * { animation: appear 300ms ease-in; animation-direction: forwards; }
+[data-slideshow] .slides .hidden { display: none !important; }
+

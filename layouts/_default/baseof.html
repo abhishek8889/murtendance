@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "fr" }}">
+<head>
+	<meta charset='UTF-8'>
+	<title>
+		{{- if .IsHome }}Mur Tendance | {{ i18n "home_meta_title" }}{{ end }}{{- block "document_title" . -}}{{ .Title }}{{- end }}{{ if not .IsHome }} | Mur Tendance{{ end -}}
+	</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	{{ if or .Params.description .IsHome }}
+	<meta name="description" content="{{ if .IsHome }}{{ i18n "home_meta_description" }}{{ else }}{{ .Params.description }}{{ end }}">
+	{{ end }}
+
+	{{ partial "stylesheet-link" "reset" }}
+	{{ partial "stylesheet-link" "main" }}
+	{{ partial "stylesheet-link" "_animations" }}
+	{{ partial "stylesheet-link" "mobile-menu" }}
+
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+	<link rel="icon" type="image/png" href="/favicon.png">
+
+	{{ partial "script-src" "sanity" }}
+	{{ partial "script-src" "ui-interactions" }}
+
+	{{- block "head_end" . -}}{{ end }}
+
+	{{ partial "stylesheet-link-for-current-page" . }}
+</head>
+<body class="{{ if .IsHome }}home{{ else }}{{ .Section }}{{ end }}{{ if .IsPage }} page{{ end }}">
+	{{ partial "google-tag-manager" "GTM-56F4HSV" }}
+	{{ partial "facebook-pixel" . }}
+
+	<header>
+		<a href='{{ $.Site.Home.Permalink }}' id='brand'>
+			<img src='{{ (partial "get-site-image" "mur-tendance-logo-badge.svg").Permalink }}' alt='Mur Tendance'>
+		</a>
+
+		<nav>
+			{{ $curPage := . }}
+			{{- range .Site.Menus.nav -}}
+			<a href='{{ .URL | absLangURL }}'
+			   {{- if or ($curPage.IsMenuCurrent "nav" .) ($curPage.HasMenuCurrent "nav" .) }} class='current'{{- end -}}>
+				{{ .Name }}
+			</a>
+			{{- end -}}
+		</nav>
+
+		<nav id='alt-menu'>
+			{{- range .Site.Menus.alt_nav -}}
+			<a href='{{ .URL | absLangURL }}'
+			   {{- if or ($curPage.IsMenuCurrent "alt_nav" .) ($curPage.HasMenuCurrent "alt_nav" .) }} class='current'{{- end -}}>
+				{{ .Name }}
+			</a>
+			{{- end -}}
+
+			{{ range .Translations }}
+				<a class='{{ .Language }} lang' href="{{ .Permalink }}">
+					{{- .Language.Lang -}}
+				</a>
+			{{ end }}
+		</nav>
+	</header>
+
+	<main>
+		{{- block "main" . }}
+		{{ .Content }}
+		{{- end }}
+	</main>
+
+	<footer>
+		<a href='{{ $.Site.Home.Permalink }}' id='footer-brand'>
+			<img src='{{ (partial "get-site-image" "mur-tendance-logo-name.svg").Permalink }}' alt='Mur Tendance'>
+		</a>
+
+		{{ range (partial "get-section-pages" "footer") }}
+			{{ .Render "generic-block" }}
+		{{ end }}
+	</footer>
+
+	<section id='legal'>
+		<p id='copyright'>© {{ now.Format "2006" }} Mur Tendance. {{ i18n "all_rights_reserved" }}
+
+		<nav>
+			{{ with .Site.GetPage "/legal" }}
+			<a href='{{ .Permalink }}'>{{ .LinkTitle }}</a>
+			{{ end }}
+		</nav>
+
+		<p id='made-by-bolean'>{{ i18n "made_by_bolean" | safeHTML }}</p>
+
+	</section>
+
+	{{ partial "script-src" "mobile-menu" }}
+	<script>
+		$on.resize(() => MobileMenu.AdjustToWidth());
+		MobileMenu.AdjustToWidth();
+
+		// Fix iOS scroll bug with header.
+		if (location.hash === '') window.scroll(0, 0);
+	</script>
+	{{- block "body_end" . -}}{{ end }}
+</body>
+</html>

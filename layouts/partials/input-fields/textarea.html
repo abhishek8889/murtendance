@@ -1,0 +1,4 @@
+<p>
+	<label for='field_{{ .name }}'>{{ if .required }}*{{ end }}{{ .label }}</label>
+	<textarea id='field_{{ .name }}' name='{{ .name }}' rows='8' {{ if .required }}required{{ end }}></textarea>
+</p>

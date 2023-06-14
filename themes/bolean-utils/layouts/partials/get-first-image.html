@@ -1,0 +1,2 @@
+{{ $images := .Resources.ByType "image" }}
+{{ return (index $images 0) }}

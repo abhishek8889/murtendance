@@ -1,0 +1,36 @@
+
+{{ define "head_end" }}
+  {{ partial "stylesheet-link" "spec-sheets" }}
+{{ end }}
+
+
+{{ define "main" }}
+  <section id="introduction" class="no-banner">
+    <div class="breadcrumb">
+      <a href="{{ .Permalink }}">
+        {{ .Title }}
+      </a>
+    </div>
+
+    <h1 style="margin-bottom: var(--spacing-medium); text-transform: uppercase;">
+      {{ .Title }}
+    </h1>
+    <ul class="list-spec-sheets">
+      {{ range .Pages }}
+        <li>
+          <a href="{{ .Permalink }}">
+            {{ $thumb := .Resources.GetMatch "thumb.jpg" }}
+            <figure>
+              <img src="{{ $thumb.Permalink }}" alt="">
+            </figure>
+            <h2>
+              {{ .Title }}
+            </h2>
+          </a>
+        </li>
+        </a>
+      {{ end }}
+    </ul>
+  </section>
+{{ end }}
+

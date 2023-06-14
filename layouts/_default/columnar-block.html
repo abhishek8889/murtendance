@@ -1,0 +1,9 @@
+{{ partial "stylesheet-link" "columnar" }}
+
+<section id='{{ partial "get-block-slug" . }}' class='columnar full-width-bg {{ with .Params.class_list }} {{ . }}{{ end }}'>
+	{{ partial "picture-16-9" (partial "get-first-image" .) }}
+
+	<div class='content'>
+		{{ .Content }}
+	</div>
+</section>

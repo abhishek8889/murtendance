@@ -1,0 +1,18 @@
+<section id='{{ partial "get-block-slug" . }}' class='{{ with .Params.class_list }} {{ . }}{{ end }}'>
+	{{ .Content }}
+
+	<form method='post' action='{{ .Params.post_to }}'>
+		{{ range .Params.fields }}
+			{{ partial (printf "input-fields/%s" .type) . }}
+		{{ end }}
+
+		<button class='arrow-link dark'>
+		  <figure>
+		    <svg xmlns="http://www.w3.org/2000/svg" width="14.216" height="8.011" viewBox="0 0 14.216 8.011">
+		      <path id="arrow-right" d="M782.476,206.851h-1.06l3.3,3.614h-12.8v.783h12.8l-3.3,3.614h1.06l3.654-4.005Z" transform="translate(-771.914 -206.851)" fill="#1d1d1f" />
+		    </svg>
+		  </figure>
+			<span>{{ .Params.labels.submit }}</span>
+		</button>
+	</form>
+</section>

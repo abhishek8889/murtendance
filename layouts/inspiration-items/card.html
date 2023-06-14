@@ -1,0 +1,10 @@
+{{ $img := (partial "get-first-image" .) }}
+{{ $products := slice }}
+{{ $products = delimit $products "" | safeHTML }}
+<a href='{{ $img.Permalink }}'
+   data-at-450="{{ ($img.Resize "400x").Permalink }}"
+   data-at-800="{{ ($img.Resize "650x").Permalink }}"
+   data-at-1366="{{ ($img.Resize "1200x").Permalink }}"
+	data-products="{{ .Params.products | jsonify }}">
+{{ partial "image-9-16" (partial "get-first-image" .) }}
+</a>

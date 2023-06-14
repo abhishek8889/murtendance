@@ -1,0 +1,191 @@
+<section id='inquiry'>
+	{{ if and (isset . "list_type") (eq .list_type "architectural-panels") }}
+		<h2>{{ i18n "work_with_us" }}</h2>
+	{{ else }}
+		<h2>{{ i18n "inquiry_form_title" }}</h2>
+	{{ end }}
+	<script src="https://www.google.com/recaptcha/api.js?render=6Lf3UG8hAAAAAGUI8vChMoM9PGHyO03B2CtzXx2Z"></script>
+	<script>
+		grecaptcha.ready(function () {
+			grecaptcha.execute('6Lf3UG8hAAAAAGUI8vChMoM9PGHyO03B2CtzXx2Z', {action: 'submit'}).then(function (token) {
+				document.getElementById('g-recaptcha-response').value = token;
+			});
+		});
+	</script>
+
+	<form id="form-formspree" method='post' enctype='multipart/form-data'>
+		<input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
+		<p>
+			<label>{{ i18n "field_full_name" }}*</label>
+			<input type="text" name="name" required>
+		</p>
+		<p>
+			<label>{{ i18n "field_email" }}*</label>
+			<input type="email" name="email_address" required>
+		</p>
+		<p>
+			<label>{{ i18n "field_phone_number" }}*</label>
+			<input type="tel" name="phone_number" required>
+		</p>
+
+		{{ if and (isset . "list_type") (ne .list_type "architectural-panels") }}
+			<p>
+				<label>{{ i18n "field_budget" }}</label>
+				<select name="budget">
+					<option>500$ - 1 000$</option>
+					<option>1 000$ - 5 000$</option>
+					<option>5 000$ - 10 000$</option>
+					<option>10 000$ - 50 000$</option>
+					<option>50 000$ - 100 000$</option>
+					<option>100 000$ et plus</option>
+				</select>
+			</p>
+		{{ end }}
+
+		{{ if (isset . "list_type") }}
+			{{ if (eq .list_type "products") }}
+			<p>
+				<label>{{ i18n "field_products" }}</label>
+				{{ $products := (.page.GetPage "/product-items").Sections }}
+
+				<ul class='input-list products'>
+					{{ range $products }}
+						{{ $slug := (partial "get-block-slug" .) }}
+					<li>
+						<input type='checkbox' name='products[]'  id='product_{{ $slug }}' value="{{ .Title }}">
+						<label for='product_{{ $slug }}'><span class='input-label'>{{ .Title }}</span></label>
+					</li>
+					{{ end }}
+				</ul>
+			</p>
+			{{ else if (eq .list_type "collections") }}
+			<p>
+				<label>{{ i18n "field_interested_by" }}</label>
+				{{ $product := (partial "get-block-slug" .page) }}
+				{{ $productName := .page.Title }}
+
+				{{ $collections := (.page.GetPage (printf "/collections/%s" $product)).Sections }}
+
+				<ul class='input-list collections'>
+				{{ range $collections }}
+
+					{{ $collection := .Title }}
+					{{ $collection_slug := (partial "get-block-slug" .) }}
+
+					<li>
+						<input type='checkbox' name='collections[]'  id='collection_{{ $collection_slug }}' value="{{ $productName }} - {{ $collection }}">
+						<label for='collection_{{ $collection_slug }}'><span class='input-label'>{{ $collection }}</span></label>
+					</li>
+				{{ end }}
+				</ul>
+			</p>
+			{{ else if (eq .list_type "models") }}
+			<p>
+				<label>{{ i18n "field_interested_by" }}</label>
+				{{ $product := (partial "get-block-slug" .page) }}
+
+
+				{{ $collections := (.page.GetPage (printf "/collections/%s" $product)).Sections }}
+				{{ range $collections }}
+
+				{{ $collection := .Title }}
+				{{ $collection_slug := (partial "get-block-slug" .) }}
+
+				<fieldset>
+					<legend>{{ $collection }}</legend>
+
+				<ul class='input-list models'>
+					{{ range .Pages }}
+					{{ $model_slug := (partial "get-block-slug" .) }}
+					<li>
+						<div class='model-check'>
+							<img src="{{ ((partial "get-first-image" .).Resize "80x80").Permalink }}">
+							<div class='content'>
+								<input type='checkbox' name='collection[]' value="{{ $collection }} - {{ .Params.name }}"
+									id='collection_{{ $collection_slug }}_{{ $model_slug }}'>
+								<label for="collection_{{ $collection_slug }}_{{ $model_slug }}">
+									<span class='input-label'>{{ .Params.name }}</span>
+								</label>
+							</div>
+					</li>
+					{{ end }}
+				</ul>
+				{{ end }}
+
+			{{ end }}
+			</p>
+		{{ else }}
+		<p>
+			<label>{{ i18n "field_rooms" }}</label>
+			<ul class='input-list'>
+				<li>
+					<input type='checkbox' name='room[]' value="Cuisine" id='room_kitchen'>
+					<label for='room_kitchen'><span class='input-label'>{{ i18n "field_room_kitchen" }}</span></label>
+				</li>
+				<li>
+					<input type='checkbox' name='room[]' id='room_bedroom' value="Chambre">
+					<label for='room_bedroom'><span class='input-label'>{{ i18n "field_room_bedroom" }}</span></label>
+				</li>
+				<li>
+					<input type='checkbox' id='room_bathroom' name='room[]' value="Salle de bain">
+					<label for='room_bathroom'><span class='input-label'>{{ i18n "field_room_bathroom" }}</span></label>
+				</li>
+				<li>
+					<input type='checkbox' id='room_dining' name='room[]' value="Salle à manger">
+					<label for='room_dining'><span class='input-label'>{{ i18n "field_room_dining_room" }}</span></label>
+				</li>
+			</ul>
+		</p>
+		{{ end }}
+
+		<div class="file-upload">
+			<label for="">{{ i18n "field_attachment" }}</label>
+			<div id="attach-file">{{ i18n "field_attachment_button" }}</div>
+			<div id='files'></div>
+		</div>
+		<p>
+			<label>{{ i18n "field_description" }}</label>
+			<textarea name='description'></textarea>
+		</p>
+
+		<button>{{ i18n "action_send" }}</button>
+	</form>
+</section>
+
+<script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+{{ partial "script-src" "cloudinary-file-uploader" }}
+{{ partial "script-src" "bolean-form.dist" }}
+
+<script>
+	(() => {
+	  const formSection = () => {
+		return document.getElementById('form-formspree');
+	  };
+  
+	  const f = new BoleanForm({
+		element: '#form-formspree',
+		email: 'info@murtendance.com',
+		cc: '',
+		endpoint: 'https://formspree.io/f/xgedrdor',
+		callback: {
+			success: () => {
+				formSection().outerHTML = '<div class="form-status">' + '{{ i18n "contact_request_sent" }}' + '</div>';
+			},
+			failed: () => {
+				formSection().outerHTML = '<div class="form-status">' + '{{ i18n "contact_request_fail" }}' + '</div>';
+			}
+		}
+	  })
+	})()
+  </script>
+  
+
+{{ if (isset . "list_type") }}
+{{ if (eq .list_type "models") }}
+<script>
+$on.dom(() => {
+		$each($all('.model-check'), i => $e(i, 'click', (evt) => $first('label', i).click()));
+});
+</script>
+{{ end }}
+{{ end }}

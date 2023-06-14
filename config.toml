@@ -1,0 +1,84 @@
+# baseURL = "https://murtendance.com/"
+baseURL = "/"
+defaultContentLanguage = "fr"
+disableHugoGeneratorInject = true
+theme = ["bolean-utils"]
+timeout = 1200000
+
+ignorefiles = [
+  "spec-sheets/**/*.pdf"
+]
+
+
+
+[markup]
+[markup.goldmark]
+[markup.goldmark.renderer]
+unsafe = true
+[markup.goldmark.parser.attribute]
+block = true
+
+[languages]
+[languages.fr]
+
+title = "Accueil"
+languageName = "Français"
+LanguageCode = "fr"
+
+
+[[languages.fr.menu.nav]]
+url = "/products"
+name = "Produits"
+weight = 1
+
+[[languages.fr.menu.nav]]
+url = "/inspirations/"
+name = "Inspirations"
+weight = 2
+
+[[languages.fr.menu.nav]]
+url = "/installation"
+name = "Installation"
+weight = 3
+
+[[languages.fr.menu.alt_nav]]
+url = "/architectural-panels"
+name = "Commercial"
+weight = 1
+
+[[languages.fr.menu.alt_nav]]
+url = "/contact"
+name = "Contact"
+weight = 2
+
+[languages.en]
+
+title = "Accueil"
+languageName = "English"
+LanguageCode = "en"
+
+
+[[languages.en.menu.nav]]
+url = "/products"
+name = "Products"
+weight = 1
+
+[[languages.en.menu.nav]]
+url = "/inspirations"
+name = "Inspirations"
+weight = 2
+
+[[languages.en.menu.nav]]
+url = "/installation"
+name = "Installation"
+weight = 3
+
+[[languages.en.menu.alt_nav]]
+url = "/en/architectural-panels"
+name = "Commercial"
+weight = 1
+
+[[languages.en.menu.alt_nav]]
+url = "/contact"
+name = "Contact"
+weight = 2

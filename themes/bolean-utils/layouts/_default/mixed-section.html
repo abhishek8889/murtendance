@@ -1,0 +1,10 @@
+{{/* Section page template for index pages that have "blocks"
+	but also nested items. Any bundle beginning with "_" will be rendered
+	by this layout. */}}
+{{ define "main" }}
+	{{ range (partial "get-section-pages" (partial "get-section-slug" .)) }}
+		{{ if eq (substr (partial "get-block-slug" .) 0 1) "_" }}
+			{{ .Render (default "generic-block" .Params.render_as) }}
+		{{ end }}
+	{{ end }}
+{{ end }}

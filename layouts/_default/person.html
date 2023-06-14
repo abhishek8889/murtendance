@@ -1,0 +1,16 @@
+{{ if .Content }}
+<a href='{{ .Permalink }}'>
+{{ end }}
+	<article id='{{ .Params.slug }}'>
+		{{ with (partial "get-first-image" .) }}
+			<img srcset="{{ (.Resize "1000x q90").Permalink }} 1200w, {{ (.Resize "800x q90").Permalink }} 900w, {{ (.Resize "400x q90").Permalink }} 650w" src='{{ (.Resize "1000x q90").Permalink }}'>
+		{{ end }}
+
+		<p>
+			<strong>{{ .Params.full_name }}</strong>
+			{{ .Params.job_title }}
+		</p>
+	</article>
+{{ if .Content }}
+</a>
+{{ end }}

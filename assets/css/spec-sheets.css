@@ -1,0 +1,39 @@
+.list-file {
+  font-size: .9rem;
+}
+
+
+.list-file li {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-small);
+}
+
+.list-file li::after {
+  content: '';
+  background-image: url('/images/pdf.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+}
+
+
+.list-spec-sheets {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: var(--spacing-large);
+}
+
+.list-spec-sheets h2{
+  text-transform: uppercase;
+}
+
+
+@media (max-width: 768px) {
+  .list-spec-sheets {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

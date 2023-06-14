@@ -1,0 +1,40 @@
+{{ define "head_end" }}
+	{{ partial "stylesheet-link" "_product-filter" }}
+	{{ partial "script-src" "product-filter" }}
+{{ end }}
+
+
+{{ define "main" }}
+{{ $blocks := (partial "get-section-pages" (partial "get-section-slug" .)) }}
+	{{ with (index $blocks 0) }}
+		{{ .Render (default "generic-block" .Params.render_as) }}
+	{{ end }}
+
+	<ul id='product-filter'>
+		<li>
+			<button class="filter defaultOpen" onclick="ProductFilter.filter(this, 'all')">
+				{{ i18n "project_filter_all" }}
+			</button>
+		</li>
+		<li>
+			<button class="filter" onclick="ProductFilter.filter(this, 'wood')">
+				{{ i18n "project_filter_wood" }}
+			</button>
+		</li>
+		<li>
+			<button class="filter" onclick="ProductFilter.filter(this, 'metal')">
+				{{ i18n "project_filter_metal" }}
+			</button>
+		</li>
+		<li>
+			<button class="filter" onclick="ProductFilter.filter(this, 'concrete')">
+				{{ i18n "project_filter_concrete" }}
+			</button>
+		</li>
+	</ul>
+
+	{{ range (after 1 $blocks) }}
+		{{ .Render (default "generic-block" .Params.render_as) }}
+	{{ end }}
+	<script>$on.dom(ProductFilter.init);</script>
+{{ end }}

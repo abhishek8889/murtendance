@@ -1,0 +1,5 @@
+{{ define "main" }}
+	{{ range (partial "get-section-pages" (partial "get-section-slug" .)) }}
+		{{ .Render (default "generic-block" .Params.render_as) }}
+	{{ end }}
+{{ end }}

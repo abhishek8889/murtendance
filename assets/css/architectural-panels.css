@@ -1,0 +1,98 @@
+#introduction.no-banner {
+    margin-top: var(--spacing-insane);
+}
+
+#introduction h1 {
+    font-size: 36px;
+    text-transform: uppercase;
+}
+
+#introduction a,
+#turnkey a {
+    background: var(--color-foreground);
+	color: var(--color-background);
+	border: 2px solid transparent;
+	border-radius: 2rem;
+	padding: 0.5ch 1.5ch;
+	display: inline-block;
+	text-transform: uppercase;
+	transition: all 350ms ease-in;
+	font-family: dunbar-tall;
+	letter-spacing: 1.18px;
+	font-size: 0.9em;
+}
+
+#showcase-display h2 { 
+    text-transform: uppercase;
+    margin-bottom: var(--spacing-large);
+}
+
+#infinite-potential > * {
+	max-width: var(--max-p-width);
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#our-clients {
+	background: var(--color-foreground);
+	color: var(--color-background);	
+}
+
+#our-clients h2 {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: var(--spacing-huge);
+}
+
+#our-clients ul {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	grid-column-gap: var(--spacing-large);
+	align-items: center;
+}
+
+#our-clients li {
+	display: flex;
+	justify-content: center;
+}
+
+/* Logo sizing */
+#our-clients img.azur-plomberie{ height: auto; width: 5rem; }
+#our-clients img.ccl-design { height: auto; width: 5rem; }
+#our-clients img.kb-construction { height: auto; width: 5rem; }
+#our-clients img.reno-raco { height: auto; width: 7rem; }
+#our-clients img.groupe-logix { height: auto; width: 5rem; }
+#our-clients img.pv-design { height: auto; width: 3.5rem; }
+
+@media screen and (max-width: 767px) {
+	.card-list { --num-columns: 1; }
+	.card-list > *:not(:last-child) { margin-bottom: var(--spacing-large); }
+
+	#our-clients {
+		padding-top: var(--spacing-huge);
+		padding-bottom: var(--spacing-huge);
+	}
+	#our-clients ul li { text-align: center; }
+	#our-clients ul {
+		grid-template-columns: repeat(3, 1fr);
+		grid-row-gap: var(--spacing-large);
+	}
+}
+
+#inquiry h2 { text-transform: uppercase; }
+
+.commercial-showcase {
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
+.commercial-showcase h2 {
+	margin-bottom: var(--spacing-large);
+	text-transform: uppercase;
+}
+
+.commercial-showcase .slides {
+	margin-bottom: var(--spacing-medium);
+}

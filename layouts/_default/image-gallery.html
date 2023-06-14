@@ -1,0 +1,15 @@
+{{ $section := . }}
+
+<section id='{{ partial "get-block-slug" $section }}' class='{{ with $section.Params.class_list }} {{ . }}{{ end }}'>
+	<div class='content'>
+		{{ .Content }}
+	</div>
+
+	<ul class='images'>
+		{{ range (.Resources.ByType "image") }}
+		<li>
+			<img srcset="{{ (.Resize "1200x q95").Permalink }} 1200w, {{ (.Resize "900x q95").Permalink }} 900w, {{ (.Resize "650x q95").Permalink }} 650w, {{ (.Resize "400x q95").Permalink }} 400w" src="{{ (.Resize "x1080 q100").Permalink }}" alt="">
+		</li>
+		{{ end }}
+	</ul>
+</section>

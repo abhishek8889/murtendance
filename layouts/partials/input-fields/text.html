@@ -1,0 +1,4 @@
+<p>
+	<label for='field_{{ .name }}'>{{ if .required }}*{{ end }}{{ .label }}</label>
+	<input type='text' id='field_{{ .name }}' name='{{ .name }}' {{ if .required }}required{{ end }}>
+</p>

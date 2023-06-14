@@ -1,0 +1,85 @@
+/*
+ * Baguette Override
+ */
+
+html {
+	--modal-img-max-width: 90vw;
+	--modal-img-max-height: 90vh;
+	--caption-height: 8rem;
+}
+
+#baguetteBox-overlay .full-image figure {
+	background: #fff;
+	padding: var(--spacing-large);
+	display: inline-flex;
+	flex-direction: column;
+	height: auto;
+	max-height: var(--modal-img-max-height);
+	max-width: var(--modal-img-max-width);
+
+	position: absolute;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	left: 50%;
+}
+
+#baguetteBox-overlay .full-image figure img {
+	order: 1;
+	height: 100%;
+	width: auto;
+	object-fit: cover;
+	box-shadow: none;
+
+	max-height: calc(var(--modal-img-max-height) - var(--caption-height));
+	max-width: var(--modal-img-max-width);
+}
+#baguetteBox-overlay .full-image figure figcaption {
+	order: 2;
+	position: static;
+	background: #fff;
+	color: var(--color-foreground);
+	text-align: left;
+	line-height: inherit;
+	white-space: normal;
+	font-family: inherit;
+}
+
+#baguetteBox-overlay .full-image figure figcaption h3 {
+	text-transform: uppercase;
+	margin-bottom: 0;
+	line-height: 2;
+}
+
+#baguetteBox-overlay h2 {
+	font-weight: normal;
+	font-size: 1rem;
+	font-family: var(--font-sans-serif);
+	margin: var(--spacing-small) 0;
+}
+
+#baguetteBox-overlay .products {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+#baguetteBox-overlay .products li {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-column-gap: var(--spacing-large);
+}
+
+#baguetteBox-overlay .products .product {
+	font-weight: 600;
+}
+
+
+@media only screen and (max-width: 780px) {
+	#baguetteBox-overlay .full-image figure {
+		padding: var(--spacing-medium);
+	}
+
+	#baguetteBox-overlay .full-image figure figcaption {
+		font-size: 0.7em;
+	}
+}

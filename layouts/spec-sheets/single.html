@@ -1,0 +1,50 @@
+
+{{ define "head_end" }}
+	{{ partial "stylesheet-link" "spec-sheets" }}
+{{ end }}
+
+
+{{ define "main" }}
+  <section id="introduction" class="no-banner">
+    {{ $curTitle := .Title }}
+    {{  with .CurrentSection }}
+      <div class="breadcrumb">
+        <a href="{{ .Permalink }}">
+      {{ .Title }}
+      </a>
+      <i class="fas fa-chevron-right"></i>
+      <strong>
+        {{ $curTitle }}
+      </strong>
+      </div>
+
+      <h1 style="margin-bottom: var(--spacing-medium); text-transform: uppercase;">
+        {{ .Title }}<br> {{ $curTitle }}
+      </h1>
+    {{ end }}
+
+
+
+    {{/*
+    The amount of pdf files could make build time and local dev refresh time
+    extremly long if files is located within content or assets directory.
+    (on m1 chip macbook air took as long as 200000ms)
+
+    Place pdf files in static directory then do file path building is
+    much faster in build time.
+    (on Hugo 0.107.0)
+    */}}
+
+    {{ $path := (printf "/static/spec-sheets/%s/files/%s" .Slug .Lang ) }}
+    {{ $f := readDir (replace $path (print "spec-sheets/" .Lang) "spec-sheets/") }}
+    <ul class="list-file">
+    {{ range $f }}
+      {{ $fileLink := (print (replace $path "/static" "") "/" .Name) }}
+      <li>
+        <a href="{{ $fileLink }}">
+        {{ .Name }}
+        </a>
+      </li>
+    {{ end }}
+    </ul>
+  {{ end }}

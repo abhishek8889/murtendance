@@ -1,0 +1,3 @@
+[submodule "themes/bolean-utils"]
+	path = themes/bolean-utils
+	url = git@bitbucket.org:proitekinc/bolean-utils-hugo.git

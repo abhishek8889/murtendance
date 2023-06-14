@@ -1,0 +1,58 @@
+#!/usr/bin/env ruby
+
+require 'fileutils'
+
+unless ARGV.size.nonzero?
+  puts <<~EOU
+Usage: img-to-model <PATH>
+
+Where PATH is a root collection folder with images.
+EOU
+end
+
+basedir = ARGV.unshift
+
+# Create model dirs
+Dir.glob(File.join(basedir, '*.jpg')).each do |img|
+  name = File.basename(img).split('.').first
+
+  modeldir = File.join(basedir, name)
+
+  FileUtils.mkdir_p(modeldir)
+  FileUtils.mv(img, File.join(modeldir, "#{name}.jpg"))
+
+  ['fr', 'en'].each do |lc|
+    File.open(File.join(modeldir, "index.#{lc}.md"), 'w+') do |fp|
+      fp.write <<~EOF
+---
+weight: 4
+
+name: #{name}
+
+_render:
+    build: never
+    list: all
+---
+EOF
+    end
+  end
+end
+
+collection = basedir.first.split(File::SEPARATOR).last
+
+# Create section index for the basedir
+%w(fr en).each do |lc|
+  File.open(File.join(basedir, "_index.#{lc}.md"), 'w+') do |fp|
+    fp.write <<~EOF
+---
+title: #{collection}
+
+class_list: square-view
+
+_render:
+    build: never
+    list: all
+---
+EOF
+  end
+end

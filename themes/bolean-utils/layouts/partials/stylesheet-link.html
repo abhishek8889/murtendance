@@ -1,0 +1,7 @@
+{{ $style := resources.Get (printf "css/%s.css" .) }}
+{{ if $style }}
+<link rel='stylesheet'
+	type='text/css'
+	media='screen'
+	href='{{ ($style | minify | fingerprint).Permalink }}'>
+{{ end }}

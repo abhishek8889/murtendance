@@ -1,0 +1,15 @@
+{{ $section := . }}
+
+<section id='{{ partial "get-block-slug" $section }}' class='{{ with $section.Params.class_list }} {{ . }}{{ end }}'>
+	<div class='content'>
+		{{ .Content }}
+	</div>
+
+	<ul class='images'>
+		{{ range (.Resources.ByType "image") }}
+		<li>
+			<img src="{{ .Permalink }}" id='{{ (index (split (path.Base .) ".") 1) | urlize | lower }}' alt=''>
+		</li>
+		{{ end }}
+	</ul>
+</section>

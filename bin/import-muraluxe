@@ -1,0 +1,97 @@
+#!/usr/bin/env ruby
+
+require 'fileutils'
+require 'nokogiri'
+require 'pp'
+
+require 'open-uri'
+
+unless ARGV.size.nonzero?
+  puts <<~EOU
+Usage: import-muraluxe <PATH>
+
+Where PATH is a hugo content item directory.
+EOU
+end
+
+basedir = ARGV.unshift
+
+COLLECTIONS = %w(
+terrazzo
+abstrait
+beton
+divers
+mineraux
+paysage
+carreaux
+selection-noires
+or
+bois
+)
+
+def scrape_url(collection)
+  url = "https://muraluxe.ca/gallery/?mtheme_featured=#{collection}"
+  dom = Nokogiri::HTML(URI.open(url))
+
+  items = []
+
+  dom.css('.photowall-item').each do |item|
+    image = item.css('.photowall-item-inner > a > img').first
+    name = item.css('.photowall-title').first
+
+    items.push({ image: image.attr('src'), name: name.text })
+  end
+
+  items
+end
+
+COLLECTIONS.each do |collection|
+  items = scrape_url(collection)
+
+  items.each do |item|
+
+  # Create model dirs
+    name = item[:name]
+
+    modeldir = File.join(basedir, collection, name)
+
+    FileUtils.mkdir_p(modeldir)
+
+    # Download image file
+    download = URI.parse(item[:image]).open
+    IO.copy_stream(download, File.join(modeldir, "#{name}.jpg"))
+
+    ['fr', 'en'].each do |lc|
+      File.open(File.join(modeldir, "index.#{lc}.md"), 'w+') do |fp|
+        fp.write <<~EOF
+  ---
+  weight: 4
+
+  name: #{name}
+
+  _render:
+      build: never
+      list: all
+  ---
+  EOF
+      end
+    end
+  end
+
+  # Create section index for the basedir
+  %w(fr en).each do |lc|
+    File.open(File.join(basedir, collection, "_index.#{lc}.md"), 'w+') do |fp|
+      fp.write <<~EOF
+  ---
+  title: #{collection}
+
+  class_list: square-view
+
+  _render:
+      build: never
+      list: all
+  ---
+  EOF
+    end
+  end
+end

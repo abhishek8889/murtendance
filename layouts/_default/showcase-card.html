@@ -1,0 +1,11 @@
+{{ $product := (partial "get-block-slug" .) }}
+<a href='{{ .Permalink }}'>
+<article id='showcase-{{ $product }}' class='card'>
+	{{ with .Site.GetPage (printf "/products/%s" $product) }}
+		{{ (partial "image-9-16" (partial "get-first-image" .)) }}
+	{{ end }}
+
+
+	<span class='label'>{{ .LinkTitle }}</span>
+</article>
+</a>

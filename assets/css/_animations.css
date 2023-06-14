@@ -1,0 +1,204 @@
+/*
+ * Animations
+ */
+
+@keyframes slideIn {
+	0% {
+		transform: translateX(500px) scale(.2);
+	}
+	100% {
+		transform: translateX(0px) scale(1);
+	}
+}
+
+@keyframes slideUpAndAppear {
+	0% {
+		transform: translateY(100px);
+		opacity: 0;
+	}
+	100% {
+		transform: translateX(0px);
+		opacity: 1;
+	}
+}
+
+@keyframes slideUp {
+	0% {
+		transform: translateY(100px);
+	}
+	100% {
+		transform: translateY(0px);
+	}
+}
+
+@keyframes expandUp {
+	0% {
+		transform: translateY(100vh);
+	}
+	100% {
+		transform: translateY(0px);
+	}
+}
+
+@keyframes expandDown {
+	0% {
+		transform: translateY(-100vh);
+	}
+	100% {
+		transform: translateY(0px);
+	}
+}
+
+@keyframes appear {
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+}
+
+@keyframes hide {
+	0% { opacity: 1; }
+	100% { opacity: 0; }
+}
+
+@keyframes expand {
+	0% {
+		transform: translateX(100vw);
+	}
+	100% {
+		transform: translateX(0px);
+	}
+}
+
+@keyframes expand-left {
+	0% {
+		transform: translateX(-100vw);
+	}
+	100% {
+		transform: translateX(0px);
+	}
+}
+
+body {
+	--animation-frame-1-duration: .550s;
+	--animation-frame-2-duration: .550s;
+	--animation-frame-3-duration: .550s;
+	--animation-frame-4-duration: .550s;
+	--animation-frame-5-duration: .550s;
+	--animation-frame-6-duration: .550s;
+
+	--animation-frame-2-delay: var(--animation-frame-1-duration);
+	--animation-frame-3-delay: calc(var(--animation-frame-2-delay) + var(--animation-frame-2-duration));
+	--animation-frame-4-delay: calc(var(--animation-frame-3-delay) + var(--animation-frame-3-duration));
+	--animation-frame-5-delay: calc(var(--animation-frame-4-delay) + var(--animation-frame-4-duration));
+	--animation-frame-6-delay: calc(var(--animation-frame-5-delay) + var(--animation-frame-5-duration));
+	--animation-frame-7-delay: calc(var(--animation-frame-6-delay) + var(--animation-frame-6-duration));
+}
+
+body > header {
+	opacity: 0;
+	animation: appear var(--animation-frame-1-duration) ease-in;
+	animation-delay: var(--animation-frame-2-delay);
+	animation-fill-mode: forwards;
+}
+#introduction, #_introduction {
+	animation: appear var(--animation-frame-1-duration) ease-in;
+	animation-fill-mode: forwards;
+}
+
+#introduction .content > *,
+#_introduction .content > * {
+	opacity: 0;
+	animation: slideUpAndAppear var(--animation-frame-2-duration) ease-in;
+	animation-fill-mode: forwards;
+}
+
+#introduction .content > *:first-child,
+#_introduction .content > *:first-child {
+	animation-delay: var(--animation-frame-1-duration);
+}
+
+
+#introduction .content > *:nth-child(2),
+#_introduction .content > *:nth-child(2) {
+	animation-delay: var(--animation-frame-3-delay);
+}
+
+#_introduction .content > *:nth-child(3),
+#introduction .content > *:nth-child(3) {
+	animation-delay: var(--animation-frame-4-delay);
+}
+
+
+.item-by-item-appear_initial > * {
+	opacity: 0;
+}
+
+.item-by-item-appear {
+	--animation-frame-1-duration: .600s;
+	--animation-frame-2-duration: .400s;
+	--animation-frame-3-duration: .350s;
+	--animation-frame-4-duration: .350s;
+	--animation-frame-5-duration: .350s;
+	--animation-frame-6-duration: .350s;
+	--animation-frame-2-delay: 250ms;
+	--animation-frame-3-delay: 500ms;
+	--animation-frame-4-delay: 800ms;
+	--animation-frame-5-delay: 1050ms;
+	--animation-frame-6-delay: 1300ms;
+}
+
+.item-by-item-appear > * {
+	opacity: 0;
+	animation: appear var(--animation-frame-1-duration) ease-in;
+	animation-delay: var(--animation-frame-1-delay);
+	animation-fill-mode: forwards;
+}
+
+.item-by-item-appear > *:nth-child(2) {
+	animation-delay: var(--animation-frame-2-delay);
+}
+
+.item-by-item-appear > *:nth-child(3) {
+	animation-delay: var(--animation-frame-3-delay);
+}
+
+.item-by-item-appear > *:nth-child(4) {
+	animation-delay: var(--animation-frame-4-delay);
+}
+
+.item-by-item-appear > *:nth-child(5) {
+	animation-delay: var(--animation-frame-5-delay);
+}
+
+.item-by-item-appear > *:nth-child(6) {
+	animation-delay: var(--animation-frame-6-delay);
+}
+
+.media-object-appear_initial > * {
+	opacity: 0;
+}
+
+.media-object-appear > * {
+	animation: appear var(--animation-frame-1-duration) ease-in;
+	animation-fill-mode: forwards;
+}
+
+.media-object-appear > img {
+	animation-delay: var(--animation-frame-2-delay);
+}
+
+.media-object-appear > .content {
+	animation-delay: var(--animation-frame-1-delay);
+}
+
+.slide-up-appear_initial {
+	opacity: 0;
+	transform: translateY(400px);
+}
+
+.slide-up-appear {
+	animation: slideUpAndAppear var(--animation-frame-1-duration) ease-in;
+	animation-delay: var(--animation-frame-1-delay);
+	animation-fill-mode: forwards;
+}
+
+

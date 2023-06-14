@@ -1,0 +1,114 @@
+html {
+	--showcase-img-height: 500px;
+}
+
+.showcase {
+	display: grid;
+	grid-template-rows: auto auto;
+	grid-template-columns: 2fr 1fr;
+
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.showcase .slides {
+	grid-row: 1;
+	grid-column: 1/all;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-column-gap: var(--spacing-large);
+
+	position: relative;
+
+	overflow: hidden;
+}
+
+.showcase .card {
+	display: grid;
+	grid-template-rows: var(--showcase-img-height) auto;
+	grid-row-gap: var(--spacing-medium);
+	margin-bottom: var(--spacing-large);
+}
+.showcase .card .label { text-align: center; }
+.showcase .card img {
+	height: 100%; width: 100%; object-fit: cover;
+}
+
+
+.showcase .bullets {
+	grid-row: 2;
+	grid-column: 1;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.showcase .bullets > * {
+	background: #ccc;
+	height: 3px;
+	width: 4.5rem;
+	display: block;
+	cursor: pointer;
+}
+
+.showcase .bullets .current { background: var(--color-foreground); }
+
+.showcase .controls {
+	grid-row: 2;
+	grid-column: 2;
+	align-items: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+.showcase button {
+	border: none;
+	outline: none;
+	background: transparent;
+	cursor: pointer;
+}
+
+@media only screen and (max-width: 1000px) {
+	.showcase .bullets {
+		flex-wrap: wrap;
+	}
+	.showcase .slides {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+@media only screen and (max-width: 567px) {
+	html {
+		--showcase-img-height: 420px;
+	}
+
+	.showcase {
+		margin-top: 0;
+		margin-bottom: 0;
+		padding-bottom: var(--spacing-large);
+		padding-top: var(--spacing-large);
+	}
+
+	.showcase .slides { grid-template-columns: 1fr; }
+	.showcase .bullets  {
+		padding-top: var(--spacing-large);
+		grid-column: 1/all;
+		display: flex;
+	}
+	.showcase .bullets > * {
+		width: 2em;
+		margin-right: .2em;
+		flex-grow: 1;
+		background: #9c9c9c;
+	}
+	.showcase .bullets > .current { background: var(--color-foreground); }
+	.showcase .controls { display: none; }	
+	.showcase .card {
+		width: 100%;
+		margin-bottom: 0;
+	}
+	.showcase .card .label {
+		color: #fff;
+		font-size: var(--font-size-small);
+	}
+}

@@ -1,0 +1,9 @@
+<section id='{{ partial "get-block-slug" . }}' class='media-object with-bg-img{{ with .Params.class_list }} {{ . }}{{ end }}'>
+	<img class='bg' src='{{ (partial "get-site-image" "pattern-background.png").Permalink }}'>
+
+	{{ partial "picture-16-9" (partial "get-first-image" .) }}
+
+	<div class='content'>
+		{{ .Content }}
+	</div>
+</section>

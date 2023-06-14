@@ -1,0 +1,11 @@
+{{ define "head_end" }}
+	{{ partial "stylesheet-link" "_inquiry-form" }}
+{{ end }}
+
+{{ define "main" }}
+	{{ range (partial "get-section-pages" (partial "get-section-slug" .)) }}
+		{{ .Render (default "generic-block" .Params.render_as) }}
+	{{ end }}
+
+	{{ partial "inquiry-form" (dict "list_type" "products" "page" .) }}
+{{ end }}

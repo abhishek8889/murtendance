@@ -1,0 +1,19 @@
+# Usual suspects
+.DS_Store
+.vscode/
+**/*.swp
+**/*.swo
+.bak
+public/
+scripts/
+releases/
+build/
+resources/
+*/_gen/
+.sass-cache
+*.bak
+doc/assets
+.DS_Store
+.hugo_build.lock
+
+test-content/

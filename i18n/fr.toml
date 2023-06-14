@@ -1,0 +1,103 @@
+[brand_name]
+other = "Mur Tendance"
+
+[all_rights_reserved]
+other = "Tous droits réservés."
+
+[home_meta_title]
+other = "Revêtements muraux haut de gamme"
+
+[home_meta_description]
+other = "Mur Tendance oeuvre dans la conception, la distribution et l’installation de revêtements muraux haut de gamme."
+
+[inspirations_products_shown]
+other = "Produits illustrés"
+
+[made_by_bolean]
+other = "<a href='https://bolean.ca'>Fait avec <i class='far fa-heart'></i> par bolēan</a>"
+
+#
+# Contact / Inquiry Form
+#
+[inquiry_form_title]
+other = "OBTENIR UNE SOUMISSION"
+
+[work_with_us]
+other = "Travaillez avec nous"
+
+[field_email]
+other = "Courriel"
+
+[field_full_name]
+other = "Nom"
+
+[field_phone_number]
+other = "Téléphone"
+
+[field_budget]
+other = "Budget"
+
+[field_rooms]
+other = "Pièces"
+
+[field_products]
+other = "Produits"
+
+[field_interested_by]
+other = "Intéressé par"
+
+[field_room_kitchen]
+other = "Cuisine"
+
+[field_room_bedroom]
+other = "Chambre"
+
+[field_room_bathroom]
+other = "Salle de bain"
+
+[field_room_dining_room]
+other = "Salle à manger"
+
+[field_description]
+other = "Décrivez votre projet"
+
+[field_attachment]
+other = "Ajouter un plans/photos"
+
+[field_attachment_button]
+other = "Téléversez"
+
+[action_send]
+other = "Envoyer"
+
+[contact_request_sent]
+other = "Merci! Votre demande a été envoyée."
+
+[contact_request_fail]
+other = "Désolé, nous n'avons pas pu traiter votre demande. Veuillez réessayer."
+
+#
+## Product Filters
+#
+
+[project_filter_all]
+other = "Tous"
+
+[project_filter_wood]
+other = "Bois"
+
+[project_filter_metal]
+other = "Métal"
+
+[project_filter_concrete]
+other = "Béton"
+
+#
+## Button text
+#
+
+[spec_sheet]
+other = "Fiches techniques"
+
+[inquery]
+other = "Obtenir une soumisson"

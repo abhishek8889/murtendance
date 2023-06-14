@@ -1,0 +1,30 @@
+{{ define "main" }}
+
+<section id='introduction'>
+{{ .Content }}
+</section>
+
+<section id='news'>
+{{ range .Pages }}
+<article>
+	<!-- Video, Photo Gallery or nil -->
+	<header>
+
+	</header>
+	<section class='summary'>
+		<time>{{ .Date }}</time>
+		{{ .Summary }}
+		<a class='arrow-link' href='{{ .Permalink }}'>
+			<span>VOIR PLUS</span>
+			<figure>
+				<svg id="Group_130" data-name="Group 130" xmlns="http://www.w3.org/2000/svg" width="44.693" height="8.004" viewBox="0 0 44.693 8.004">
+					<path id="arrow-right" data-name="Polygon 1" d="M4,0,8,8H0Z" transform="translate(44.693) rotate(90)" fill="#fff"/>
+					<line id="Line_1" data-name="Line 1" x1="37.355" transform="translate(0 4.002)" fill="none" stroke="#fff" stroke-width="2"/>
+				</svg>
+			</figure>
+		</a>
+	</section>
+</article>
+{{ end }}
+</section>
+{{ end }}

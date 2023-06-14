@@ -1,0 +1,12 @@
+<section id='{{ partial "get-block-slug" . }}'
+		 class='media-object{{ with .Params.class_list }} {{ . }}{{ end }}'
+		 {{ if .Params.data_item }} data-item="{{ .Params.data_item }}" {{ end }}
+	>
+	<figure class='media'>
+	{{ partial "picture-16-9" (partial "get-first-image" .) }}
+	</figure>
+
+	<div class='content'>
+		{{ .Content }}
+	</div>
+</section>

@@ -1,0 +1,12 @@
+{{ $section := . }}
+
+{{ with .Resources.ByType "image" }}
+  {{ range first 1 . }}
+<section id='{{ partial "get-block-slug" $section }}' class='background-section{{ with $section.Params.class_list }} {{ . }}{{ end }}' style="background-image: url({{ .RelPermalink }});">
+  {{ end }}
+{{ end }}
+
+	<div class='content'>
+		{{ .Content }}
+	</div>
+</section>

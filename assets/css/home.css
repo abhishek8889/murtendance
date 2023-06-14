@@ -1,0 +1,12 @@
+@media only screen and (max-width: 567px) {
+	/* Showcase has a black background & padding in mobile. */
+	#introduction { margin-bottom: 0; }
+}
+
+
+@media only screen and (max-width: 550px) {
+	#adapt-create { margin-bottom: 0; }
+	#services,
+	#unique-projects { margin-top: 0; margin-bottom: 0; }
+	#testimonials { padding-bottom: var(--spacing-small); }
+}

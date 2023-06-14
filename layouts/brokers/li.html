@@ -1,0 +1,7 @@
+<article id='{{ .Params.slug }}'>
+	{{ with (partial "get-first-image" .) }}
+	<img src='{{ (.Resize "x550 q90").Permalink }}'>
+	{{ end }}
+
+	{{ .Content }}
+</article>

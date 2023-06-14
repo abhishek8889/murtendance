@@ -1,0 +1,12 @@
+<p>
+	<label for='field_{{ .name }}'>{{ if .required }}*{{ end }}{{ .label }}</label>
+
+	<select id='field_{{ .name }}' name='{{ .name }}' {{ if .required }}required{{ end }}>
+		{{ if .include_blank }}
+		<option></option>
+		{{ end }}
+		{{ range .options }}
+		<option value='{{ .value }}'>{{ .label }}</option>
+		{{ end }}
+	</select>
+</p>

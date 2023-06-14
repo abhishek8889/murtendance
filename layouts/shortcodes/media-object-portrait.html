@@ -1,0 +1,12 @@
+{{ $img := .Page.Resources.GetMatch (.Params.image) }}
+<div class='media-object portrait'>
+	{{ if $img }}
+	<figure class='media'>
+		{{ partial "image-9-16" $img }}
+	</figure>
+	{{ end }}
+
+	<div class='content'>
+		{{ .Inner | markdownify }}
+	</div>
+</div>

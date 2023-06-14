@@ -1,0 +1,111 @@
+#!/usr/bin/env ruby
+
+require 'base64'
+require 'fileutils'
+require 'nokogiri'
+require 'pp'
+
+require 'open-uri'
+
+unless ARGV.size.nonzero?
+  puts <<~EOU
+Usage: import-lcda <PATH>
+
+Where PATH is a hugo content item directory.
+EOU
+end
+
+basedir = ARGV.unshift
+
+COLLECTIONS = %w(
+  https://www.ober-surfaces.com/en/concrete-wall-panel-panbeton.html
+  https://www.ober-surfaces.com/en/concrete-light-wall-panel-slimbeton.html
+)
+
+def scrape_collection(url)
+  dom = Nokogiri::HTML(URI.open(url))
+
+  categories = []
+  dom.css('.category_element_image').each do |cat|
+    url = cat.attr('href')
+    img = cat.css('img').first
+    name = img ? img.attr('alt') : cat.css('.lazy_product_image').attr('data-alt')
+    categories.push({ name: name, url: url })
+  end
+
+  categories
+end
+
+def scrape_category(url)
+  dom = Nokogiri::HTML(URI.open(url))
+  items = []
+
+  dom.css('.product_document_image').each do |item|
+    product_id = item.attr('data-productid')
+    image = item.css('img').first
+    name = image.attr('alt')
+    image_url = Base64.decode64(item.attr('data-link'))
+    items.push({ image: image_url, name: name })
+  end
+
+  items
+end
+
+COLLECTIONS.each do |collection|
+  categories = scrape_collection(collection)
+
+  categories.each do |cat|
+    items = scrape_category(cat[:url])
+    collection_name = collection.split('.')[-2].split('/').last
+    items.each do |item|
+
+    # Create model dirs
+      name = item[:name]
+
+      next if name.split('-').last == 'zoom'
+      name = name.split('-').first
+
+      modeldir = File.join(basedir, collection_name, cat[:name], name)
+
+      FileUtils.mkdir_p(modeldir)
+
+      # Download image file
+      download = URI.parse(item[:image]).open
+      IO.copy_stream(download, File.join(modeldir, "#{name}.jpg"))
+
+      ['fr', 'en'].each do |lc|
+        File.open(File.join(modeldir, "index.#{lc}.md"), 'w+') do |fp|
+          fp.write <<~EOF
+    ---
+    weight: 4
+
+    name: #{name}
+
+    _render:
+        build: never
+        list: all
+    ---
+    EOF
+        end
+      end
+    end
+
+    # Create section index for the basedir
+    %w(fr en).each do |lc|
+      FileUtils.mkdir_p(File.join(basedir, collection_name, cat[:name]))
+      File.open(File.join(basedir, collection_name, cat[:name], "_index.#{lc}.md"), 'w+') do |fp|
+        fp.write <<~EOF
+    ---
+    title: #{collection_name}
+
+    class_list: square-view
+
+    _render:
+        build: never
+        list: all
+    ---
+    EOF
+      end
+    end
+  end
+end

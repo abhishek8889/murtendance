@@ -1,0 +1,3 @@
+{{ with . }}
+    <img srcset="{{ (.Resize "x400 q95").Permalink }} 400w" src="{{ (.Resize "x1080 q100").Permalink }}" alt="">
+{{ end }}

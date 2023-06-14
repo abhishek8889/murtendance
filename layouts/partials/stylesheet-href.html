@@ -1,0 +1,4 @@
+{{ $style := resources.Get (printf "css/%s.css" .) }}
+{{ if $style }}
+{{ ($style | minify | fingerprint).Permalink }}
+{{ end }}

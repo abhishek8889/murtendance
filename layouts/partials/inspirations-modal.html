@@ -1,0 +1,11 @@
+<script>
+const PRODUCTS_SHOWN = {{ i18n "inspirations_products_shown" }};
+$on.dom(() => baguetteBox.run('.image-gallery', {
+	captions: (el) => {
+		const prods = JSON.parse($get(el, 'data-products'));
+		const productStr = $map(prods, i => `<li><span class='product'>${i.product}</span><span class='collection'>${i.collection}</span><span class='model'>${i.model || ''}</span></li>`).join(' ');
+
+		return `<h2>${PRODUCTS_SHOWN}</h2><ul class='products'>${productStr}</ul>`;
+	}
+}));
+</script>

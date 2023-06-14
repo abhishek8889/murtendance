@@ -1,0 +1,62 @@
+{{ define "document_title" }}
+{{ $product := (partial "get-block-slug" .) }}
+{{ with .GetPage (printf "/product-items/%s" $product) }}{{ .LinkTitle }} - Collections{{ end }}
+{{ end }}
+
+{{ define "head_end" }}
+	{{ partial "stylesheet-link" "baguetteBox.min" }}
+	{{ partial "stylesheet-link" "_inquiry-form" }}
+	{{ partial "script-src" "baguetteBox" }}
+
+	<style>
+		#baguetteBox-overlay .full-image img {
+			box-shadow: none;
+		}
+	</style>
+{{ end }}
+
+{{ define "main" }}
+
+{{ $product := (partial "get-block-slug" .) }}
+
+<section id='introduction' class='no-banner'>
+	<h1 class='breadcrumb'>
+		{{ with .GetPage "/products" }}<a href="{{ .Permalink }}">{{ .LinkTitle }}</a>{{ end }}
+		<i class='fas fa-chevron-right'></i>
+		{{ with .GetPage (printf "/product-items/%s" $product) }}<a href="{{ .Permalink }}">{{ .LinkTitle }}</a>{{ end }}
+		<i class='fas fa-chevron-right'></i>
+		<strong>Collections</strong>
+	</h1>
+
+	<h2>COLLECTIONS</h2>
+
+	<div class="links">
+		<a class='action' href='#inquiry'>{{ i18n "inquery" }}</a>
+		{{ if or .Params.spectsheet_link }}
+			<a class='action button_secondary' href='{{ .Params.spectsheet_link }}'>{{ i18n "spec_sheet" }}</a>
+		{{ end }}
+	</div>
+</section>
+
+{{ range .Sections }}
+<section id='{{ (partial "get-block-slug" .) }}' class='collection {{ .Params.class_list }}'>
+	<h3>{{ .Title }}</h3>
+
+	<ul class='models'>
+		{{ range .Pages }}
+		<li>{{ .Render "model" }}</li>
+		{{ end }}
+	</ul>
+</section>
+{{ end }}
+
+{{ partial "inquiry-form" . }}
+
+	<script>
+		$on.dom(() => baguetteBox.run('.models', {
+			captions: (el) => {
+				return `<span>${$get(el, 'data-name')}</span>`;
+			}
+		}));
+	</script>
+{{ end }}

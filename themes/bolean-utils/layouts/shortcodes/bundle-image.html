@@ -1,0 +1,2 @@
+{{ $img := .Page.Resources.GetMatch (.Params.src) }}
+<img src="{{ $img.Permalink }}" alt="{{ default "" .Params.alt }}">

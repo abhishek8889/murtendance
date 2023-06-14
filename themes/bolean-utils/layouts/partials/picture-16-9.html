@@ -1,0 +1,4 @@
+<!-- REQUIRES that the source image be at least 1080p. -->
+{{ with . }}
+	<img srcset="{{ (.Resize "1200x q95").Permalink }} 1200w, {{ (.Resize "900x q95").Permalink }} 900w, {{ (.Resize "650x q95").Permalink }} 650w, {{ (.Resize "400x q95").Permalink }} 400w" src="{{ (.Resize "x1080 q100").Permalink }}" alt="">
+{{ end }}

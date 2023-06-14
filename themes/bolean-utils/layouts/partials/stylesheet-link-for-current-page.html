@@ -1,0 +1,12 @@
+{{ $style := "" }}
+{{ if .IsHome }}
+	{{ $style = "home" }}
+{{ else }}
+	{{ if eq .Kind "section" }}
+		{{ $style = (partial "get-section-slug" . )}}
+	{{ else }}
+		{{ $style = (printf "%s-single" (partial "get-section-slug" .)) }}
+	{{ end }}
+{{ end }}
+
+{{ partial "stylesheet-link" $style }}
